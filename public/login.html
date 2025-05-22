@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | BotCare</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      padding: 40px 30px;
+      width: 350px;
+      animation: fadeIn 1.3s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-container h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      color: white;
+      outline: none;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      transition: 0.3s;
+      pointer-events: none;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0 5px;
+      font-size: 12px;
+      color: #00d8ff;
+      border-radius: 5px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #00d8ff;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #00b4cc;
+    }
+
+    .register-link {
+      margin-top: 15px;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .register-link a {
+      color: #00d8ff;
+      text-decoration: none;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <input type="email" id="email" required placeholder=" " />
+        <label for="email">Email</label>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" required placeholder=" " />
+        <label for="password">Password</label>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="register-link">
+      Don’t have an account? <a href="register.html">Register here</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // 🌐 Replace this with your real Google Apps Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          const user = data.find(u => u.email === email && u.password === password);
+          if (user) {
+            alert("✅ Login Successful");
+            window.location.href = "home.html"; // update as per your dashboard
+          } else {
+            alert("❌ Invalid Email or Password");
+          }
+        })
+        .catch(err => alert("Error: " + err));
+    });
+  </script>
+</body>
+</html>
