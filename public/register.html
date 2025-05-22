@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | BotCare</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #001f3f, #0074D9);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .register-container {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      border-radius: 16px;
+      padding: 40px 30px;
+      width: 350px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .register-container h2 {
+      color: white;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      padding-left: 15px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      color: white;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    .form-group label {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0 5px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #00d8ff;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #00d8ff;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .register-btn:hover {
+      background: #00b4cc;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #00d8ff;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Create Account</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <input type="text" id="name" required placeholder=" " />
+        <label for="name">Full Name</label>
+      </div>
+
+      <div class="form-group">
+        <input type="email" id="email" required placeholder=" " />
+        <label for="email">Email</label>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" required placeholder=" " />
+        <label for="password">Password</label>
+      </div>
+
+      <button type="submit" class="register-btn">Register</button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // 🌐 Replace with your Apps Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams({ name, email, password }),
+      })
+        .then((res) => res.text())
+        .then((msg) => {
+          alert("✅ Registered Successfully!\n" + msg);
+          window.location.href = "login.html";
+        })
+        .catch((err) => alert("❌ Error: " + err));
+    });
+  </script>
+</body>
+</html>
