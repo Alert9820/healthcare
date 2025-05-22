@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BotCare Assistant</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #111;
+      color: white;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #1c1c1c;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.3s;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 22px;
+      text-align: center;
+      color: #00d8ff;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #ccc;
+      margin: 12px 0;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #00d8ff;
+      color: #000;
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: slideIn 1s ease;
+      position: relative;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+
+    .main h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #00d8ff;
+      text-align: center;
+    }
+
+    .main p {
+      max-width: 500px;
+      text-align: center;
+      font-size: 17px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .start-btn {
+      margin-top: 30px;
+      padding: 12px 28px;
+      background: #00d8ff;
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .start-btn:hover {
+      background: #00b4cc;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      color: #00d8ff;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        position: absolute;
+        left: -250px;
+        top: 0;
+        height: 100vh;
+        z-index: 10;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .toggle-btn {
+        display: block;
+      }
+
+      .main {
+        padding-top: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <h2>BotCare</h2>
+    <a href="home.html">🏠 Home</a>
+    <a href="assistant.html">🤖 Assistant</a>
+    <a href="history.html">📜 History</a>
+    <a href="about.html">ℹ️ About</a>
+    <a href="login.html">🚪 Logout</a>
+  </div>
+
+  <div class="main">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <h1>Welcome to BotCare</h1>
+    <p>
+      Your smart healthcare assistant is here! Talk with our bot for advice, reports, tracking, or anything health-related.
+    </p>
+    <button class="start-btn" onclick="window.location.href='assistant.html'">
+      Launch Assistant 🤖
+    </button>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>
